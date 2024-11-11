@@ -7,7 +7,7 @@ export class GameScene extends Phaser.Scene{
     constructor(){
         super({ key: "game"});
 
-        this.obsitcle = this.add.group
+        this.obsitcle;
     }
 
     preload(){
@@ -21,9 +21,15 @@ export class GameScene extends Phaser.Scene{
         this.generator = new Generator(this);
 
         this.player = new Player(this, WIDTH / 2, HEIGHT / 2);
+        this.obsitcle = this.add.group();
+        this.physics.add.collider(this.player,this.obsitcle,this.hitObstical,()=>{return true})
     }
 
     update(){
         this.player.update();
+    }
+
+    hitObstical(player,obsitcle){
+        console.log("player hit");
     }
 }
